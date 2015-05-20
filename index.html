@@ -103,8 +103,12 @@
     document.addEventListener('DOMContentLoaded', function() {
       var myElement = document.getElementById('firstCard');
       var hammertime = new Hammer(myElement);
+      //hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
       hammertime.on('swipe', function(ev) {
-          console.log(ev);
+          if (ev.direction === Hammer.DIRECTION_LEFT) {
+            // scored, show next card
+            console.log("score card");
+          }
       });
     });
   </script>
@@ -129,24 +133,8 @@
       2<div class="points-label">Point</div>
     </div>
   </div>
-  <div class="card" id="firstCard">
-    <h1>Bob Ross</h1>
-    <p>
-      A painter and TV host, who starred
-      in PBS's The Joy of Painting. He
-      taught viewers how to paint "fluffy
-      white clouds" and "happy little
-      trees" using wet on wet painting. He
-      supposedly hated his white-guy afro
-      and kept it only for marketing
-      purposes.
-    </p>
-    <div class="line"></div>
-    <div class="genre">Celebrities</div>
-    <div class="points">
-      2<div class="points-label">Point</div>
-    </div>
-  </div>
+  <button role="button">menu</button>
+  <button role="button">skip</button>
 </div>
 
 </body>
