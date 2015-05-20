@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
   <title>Monikers</title>
   <link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
-  <link rel="stylesheet" href="http://cloud.typography.com/7836072/694904/css/fonts.css">
+  <!-- <link rel="stylesheet" href="http://cloud.typography.com/7836072/694904/css/fonts.css"> -->
+
+  <script src="hammer.min.js"></script>
 
   <style>
     html, body, main {
@@ -99,7 +101,11 @@
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      console.log("ready");
+      var myElement = document.getElementById('firstCard');
+      var hammertime = new Hammer(myElement);
+      hammertime.on('swipe', function(ev) {
+          console.log(ev);
+      });
     });
   </script>
 </head>
