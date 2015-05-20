@@ -33,7 +33,7 @@
 
     #table {
       height: 400px;
-      width: 550px;
+      width: 800px;
       background-color: rgba(157, 173, 182, 1);
       overflow: hidden;
     }
@@ -104,6 +104,11 @@
       font-size: 8px;
     }
 
+    .card-transform {
+      transform: translateX(-240px);
+      transition: 1s ease-in-out;
+    }
+
     #menu {
       text-align: center;
       padding: 20px;
@@ -140,8 +145,7 @@
       //hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
       hammertime.on('swipe', function(ev) {
           if (ev.direction === Hammer.DIRECTION_LEFT) {
-            // scored, show next card
-            console.log("score card");
+            scoreCard();
           }
       });
     });
@@ -194,6 +198,12 @@
 
     function nextCard() {
       currentCard++;
+      var f = document.getElementById('firstCard');
+      f.classList.add("card-transform");
+
+      var s = document.getElementById('secondCard');
+      s.classList.add("card-transform");
+
       // animate to next card, and but one next to it, something like this
     }
 
