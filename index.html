@@ -4,13 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Monikers</title>
-  <!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
   <link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
   <link rel="stylesheet" href="http://cloud.typography.com/7836072/694904/css/fonts.css">
-
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenLite.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/utils/Draggable.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/plugins/CSSPlugin.min.js"></script>
 
   <style>
     html, body, main {
@@ -29,16 +24,15 @@
       /* best helvetica */
       font-family: "Gotham Rounded A", sans-serif;
       font-weight: 300;
+      margin: 0;
+      background-color: rgba(157, 173, 182, 0.5);
     }
 
     #table {
-      height: 1000px;
-      width: 1000px;
-      background-color: rgba(157, 173, 182, 0.5);
-      padding: 20px;
     }
 
     .card {
+      margin: 10px;
       position: relative;
       padding: 20px;
       /* 6x9 cm */
@@ -105,44 +99,48 @@
   </style>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      Draggable.create(".card", {
-        bounds: document.getElementById("table"),
-        onClick:function() {
-          console.log("clicked");
-        },
-        onDragEnd:function() {
-          console.log("drag ended");
-        }
-      });
       console.log("ready");
     });
-
   </script>
 </head>
 <body>
 <div id="table">
   <div class="card" id="firstCard">
-  <h1>Bob Ross</h1>
-  <p>
-    A painter and TV host, who starred
-    in PBS's The Joy of Painting. He
-    taught viewers how to paint "fluffy
-    white clouds" and "happy little
-    trees" using wet on wet painting. He
-    supposedly hated his white-guy afro
-    and kept it only for marketing
-    purposes.
-  </p>
-  <div class="line"></div>
-  <div class="genre">Celebrities</div>
-
-  <div class="points">
-    2
-    <div class="points-label">Point</div>
+    <h1>Bob Ross</h1>
+    <p>
+      A painter and TV host, who starred
+      in PBS's The Joy of Painting. He
+      taught viewers how to paint "fluffy
+      white clouds" and "happy little
+      trees" using wet on wet painting. He
+      supposedly hated his white-guy afro
+      and kept it only for marketing
+      purposes.
+    </p>
+    <div class="line"></div>
+    <div class="genre">Celebrities</div>
+    <div class="points">
+      2<div class="points-label">Point</div>
+    </div>
   </div>
-
+  <div class="card" id="firstCard">
+    <h1>Bob Ross</h1>
+    <p>
+      A painter and TV host, who starred
+      in PBS's The Joy of Painting. He
+      taught viewers how to paint "fluffy
+      white clouds" and "happy little
+      trees" using wet on wet painting. He
+      supposedly hated his white-guy afro
+      and kept it only for marketing
+      purposes.
+    </p>
+    <div class="line"></div>
+    <div class="genre">Celebrities</div>
+    <div class="points">
+      2<div class="points-label">Point</div>
+    </div>
   </div>
-
 </div>
 
 </body>
