@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monikers</title>
+  <!-- Normalize.css is a customisable CSS file that makes browsers render all elements more consistently and in line with modern standards. -->
+  <link rel="stylesheet" media="screen" href="https://raw.github.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="http://cloud.typography.com/7836072/694904/css/fonts.css">
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenLite.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/utils/Draggable.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/plugins/CSSPlugin.min.js"></script>
+
+  <style>
+    html, body, main {
+      height: 100%;
+      width: 100%;
+    }
+    /* apply a natural box layout model to all elements, but allowing components to change */
+    html {
+      box-sizing: border-box;
+    }
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    body {
+      /* best helvetica */
+      font-family: "Gotham Rounded A", sans-serif;
+      font-weight: 300;
+    }
+
+    #table {
+      height: 1000px;
+      width: 1000px;
+      background-color: rgba(157, 173, 182, 0.5);
+      padding: 20px;
+    }
+
+    .card {
+      position: relative;
+      padding: 20px;
+      /* 6x9 cm */
+      width: 240px;
+      height: 360px;
+      background-color: white;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+      /*background-image: url(back.jpg);*/
+    }
+
+    .card > h1 {
+      font-size: 18px;
+      margin-top: 26px;
+      margin-bottom: 23px;
+      font-weight: normal;
+      height: 46px;
+      line-height: 23px;
+    }
+
+    .card > p {
+      font-size: 12px;
+    }
+
+    .card > .line {
+      position: absolute;
+      bottom: 100px;
+      left: 70px;
+      width: 100px;
+      border-bottom: 2px dotted gray;
+    }
+
+    .card > .genre {
+      text-transform: uppercase;
+      position: absolute;
+      bottom: 70px;
+      left: 20px;
+      width: 200px;
+      color: #62A591;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    .card > .points {
+      position: absolute;
+      bottom: 0;
+      left: 90px;
+      color: white;
+      background-color: #62A591;
+      width: 60px;
+      height: 50px;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      font-size: 20px;
+      padding-top: 5px;
+    }
+
+    .card > .points > .points-label {
+      text-transform: uppercase;
+      font-size: 8px;
+    }
+
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      Draggable.create(".card", {
+        bounds: document.getElementById("table"),
+        onClick:function() {
+          console.log("clicked");
+        },
+        onDragEnd:function() {
+          console.log("drag ended");
+        }
+      });
+      console.log("ready");
+    });
+
+  </script>
+</head>
+<body>
+<div id="table">
+  <div class="card" id="firstCard">
+  <h1>Bob Ross</h1>
+  <p>
+    A painter and TV host, who starred
+    in PBS's The Joy of Painting. He
+    taught viewers how to paint "fluffy
+    white clouds" and "happy little
+    trees" using wet on wet painting. He
+    supposedly hated his white-guy afro
+    and kept it only for marketing
+    purposes.
+  </p>
+  <div class="line"></div>
+  <div class="genre">Celebrities</div>
+
+  <div class="points">
+    2
+    <div class="points-label">Point</div>
+  </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
