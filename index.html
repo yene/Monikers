@@ -104,6 +104,14 @@
       font-size: 8px;
     }
 
+    #menu {
+      text-align: center;
+      padding: 20px;
+    }
+
+    #menu > a {
+      margin-left: 5px;
+    }
   </style>
   <script>
     var cards;
@@ -115,6 +123,16 @@
 
 
 
+
+      // setup buttons
+      var e = document.getElementById('menu-btn');
+      e.addEventListener("click", function() {
+        console.log("got to menu");
+      });
+      var e = document.getElementById('skip-btn');
+      e.addEventListener("click", function() {
+        skipCard();
+      });
 
       // setup swipe handler
       var myElement = document.getElementById('table');
@@ -232,7 +250,10 @@
 
 
 </div>
-  <a role="button" class="pure-button" href="#">Menu</a>
-  <a role="button" class="pure-button pure-button-primary" href="#">Skip Card</a>
+<div id="menu">
+  <a role="button" class="pure-button" id="menu-btn" href="#">Menu</a>
+  <a role="button" class="pure-button pure-button-primary" id="skip-btn" href="#">Skip Card</a>
+  <a role="button" class="pure-button" id="score-btn" href="#">Score</a>
+</div>
 </body>
 </html>
