@@ -33,7 +33,7 @@
 
     #table {
       height: 400px;
-      width: 800px;
+      width: 550px;
       background-color: rgba(157, 173, 182, 1);
       overflow: hidden;
     }
@@ -106,7 +106,17 @@
 
   </style>
   <script>
+    var cards;
+    var currentCard = 0;
+
     document.addEventListener('DOMContentLoaded', function() {
+      // TODO: loading could be optimized
+      getCards();
+
+
+
+
+      // setup swipe handler
       var myElement = document.getElementById('table');
       var hammertime = new Hammer(myElement);
       //hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
@@ -117,6 +127,66 @@
           }
       });
     });
+
+    function getCards() {
+      var request = new XMLHttpRequest();
+      request.open('GET', '/cards.json', true);
+      request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+          cards = JSON.parse(this.response);
+          setupCards();
+        } else {
+          console.log("We reached our target server, but it returned an error");
+        }
+      };
+      request.onerror = function() {
+        console.log("There was a connection error of some sort");
+      };
+      request.send();
+    }
+
+    function setupCards() {
+      var card = cards[0];
+      document.querySelector('#firstCard h1').innerHTML = card.Person;
+      document.querySelector('#firstCard p').innerHTML = card.Text;
+      document.querySelector('#firstCard .genre').innerHTML = card.Genre;
+      document.querySelector('#firstCard .points-value').innerHTML = card.Points;
+
+      switch (card.Points) {
+        case "1":
+          document.querySelector('#firstCard .genre').style.color = "#54b899";
+          document.querySelector('#firstCard .points').style.background = "#54b899";
+          break;
+        case "2":
+          document.querySelector('#firstCard .genre').style.color = "#15ace5";
+          document.querySelector('#firstCard .points').style.background = "#15ace5";
+          break;
+        case "3":
+          document.querySelector('#firstCard .genre').style.color = "#8f66a5";
+          document.querySelector('#firstCard .points').style.background = "#8f66a5";
+          break;
+        case "4":
+          document.querySelector('#firstCard .genre').style.color = "#e84735";
+          document.querySelector('#firstCard .points').style.background = "#e84735";
+          break;
+        default:
+          console.log("I didn't know I this exists.")
+      }
+    }
+
+    function nextCard() {
+      currentCard++;
+      // animate to next card, and but one next to it, something like this
+    }
+
+    function scoreCard() {
+      nextCard();
+    }
+
+    function skipCard() {
+      nextCard();
+    }
+
   </script>
 </head>
 <body>
@@ -136,10 +206,11 @@
     <div class="line"></div>
     <div class="genre">Celebrities</div>
     <div class="points">
-      2<div class="points-label">Point</div>
+      <span class="points-value">2</span>
+      <div class="points-label">Point</div>
     </div>
   </div>
-  <div class="card" id="firstCard">
+  <div class="card" id="secondCard">
     <h1>Bob Ross</h1>
     <p>
       A painter and TV host, who starred
@@ -154,7 +225,8 @@
     <div class="line"></div>
     <div class="genre">Celebrities</div>
     <div class="points">
-      2<div class="points-label">Point</div>
+      <span class="points-value">2</span>
+      <div class="points-label">Point</div>
     </div>
   </div>
 

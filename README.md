@@ -1,4 +1,25 @@
+# Monikers
+Tested on iPhone.
 
+
+# Todo
+* add manifest with the card json
+* fix "Card by ..." cards
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+start, enter number of players,
 
 
 
