@@ -111,7 +111,6 @@
 
     #menu {
       text-align: center;
-      padding: 20px;
     }
 
     #menu > a {
@@ -125,9 +124,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       // TODO: loading could be optimized
       getCards();
-
-
-
 
       // setup buttons
       var e = document.getElementById('menu-btn');
@@ -156,7 +152,8 @@
       request.onload = function() {
         if (this.status >= 200 && this.status < 400) {
           cards = JSON.parse(this.response);
-          setupCards();
+          setupCard(0);
+          setupCard(1);
         } else {
           console.log("We reached our target server, but it returned an error");
         }
@@ -167,29 +164,29 @@
       request.send();
     }
 
-    function setupCards() {
-      var card = cards[0];
-      document.querySelector('#firstCard h1').innerHTML = card.Person;
-      document.querySelector('#firstCard p').innerHTML = card.Text;
-      document.querySelector('#firstCard .genre').innerHTML = card.Genre;
-      document.querySelector('#firstCard .points-value').innerHTML = card.Points;
+    function setupCard(index) {
+      var card = cards[index];
+      document.querySelector('#card-' + index + ' h1').innerHTML = card.Person;
+      document.querySelector('#card-' + index + ' p').innerHTML = card.Text;
+      document.querySelector('#card-' + index + ' .genre').innerHTML = card.Genre;
+      document.querySelector('#card-' + index + ' .points-value').innerHTML = card.Points;
 
       switch (card.Points) {
         case "1":
-          document.querySelector('#firstCard .genre').style.color = "#54b899";
-          document.querySelector('#firstCard .points').style.background = "#54b899";
+          document.querySelector('#card-' + index + ' .genre').style.color = "#54b899";
+          document.querySelector('#card-' + index + ' .points').style.background = "#54b899";
           break;
         case "2":
-          document.querySelector('#firstCard .genre').style.color = "#15ace5";
-          document.querySelector('#firstCard .points').style.background = "#15ace5";
+          document.querySelector('#card-' + index + ' .genre').style.color = "#15ace5";
+          document.querySelector('#card-' + index + ' .points').style.background = "#15ace5";
           break;
         case "3":
-          document.querySelector('#firstCard .genre').style.color = "#8f66a5";
-          document.querySelector('#firstCard .points').style.background = "#8f66a5";
+          document.querySelector('#card-' + index + ' .genre').style.color = "#8f66a5";
+          document.querySelector('#card-' + index + ' .points').style.background = "#8f66a5";
           break;
         case "4":
-          document.querySelector('#firstCard .genre').style.color = "#e84735";
-          document.querySelector('#firstCard .points').style.background = "#e84735";
+          document.querySelector('#card-' + index + ' .genre').style.color = "#e84735";
+          document.querySelector('#card-' + index + ' .points').style.background = "#e84735";
           break;
         default:
           console.log("I didn't know I this exists.")
@@ -198,11 +195,17 @@
 
     function nextCard() {
       currentCard++;
-      var f = document.getElementById('firstCard');
+      var f = document.getElementById('card-0');
       f.classList.add("card-transform");
 
-      var s = document.getElementById('secondCard');
+      var s = document.getElementById('card-1');
       s.classList.add("card-transform");
+
+      // copy card to the end
+      var c = f.cloneNode(true);
+      c.setAttribute('id', 'card-2')
+      document.getElementById('table').appendChild(c);
+      setupCard(2);
 
       // animate to next card, and but one next to it, something like this
     }
@@ -219,7 +222,7 @@
 </head>
 <body>
 <div id="table">
-  <div class="card" id="firstCard">
+  <div class="card" id="card-0">
     <h1>Bob Ross</h1>
     <p>
       A painter and TV host, who starred
@@ -238,7 +241,7 @@
       <div class="points-label">Point</div>
     </div>
   </div>
-  <div class="card" id="secondCard">
+  <div class="card" id="card-1">
     <h1>Bob Ross</h1>
     <p>
       A painter and TV host, who starred
@@ -261,9 +264,11 @@
 
 </div>
 <div id="menu">
+  <p style="font-size: 12px;">To score card swipe to the right</p>
   <a role="button" class="pure-button" id="menu-btn" href="#">Menu</a>
   <a role="button" class="pure-button pure-button-primary" id="skip-btn" href="#">Skip Card</a>
   <a role="button" class="pure-button" id="score-btn" href="#">Score</a>
+
 </div>
 </body>
 </html>
