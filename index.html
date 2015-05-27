@@ -126,6 +126,10 @@
   <script>
     var cards;
     var currentCard = 0;
+    var score = [0,0];
+    var currentTeam = 0;
+    var teamA = 0;
+    var teamB = 1;
 
     document.addEventListener('DOMContentLoaded', function() {
       // TODO: loading could be optimized
@@ -150,7 +154,7 @@
             scoreCard();
           }
       });
-
+      start();
     });
 
     function getCards() {
@@ -169,6 +173,21 @@
         console.log("There was a connection error of some sort");
       };
       request.send();
+    }
+
+    function start() {
+      var time = 60;
+      var myElement = document.getElementById('timer-btn');
+      var v = setInterval(function() {
+        time--;
+        myElement.innerHTML = time + 's';
+      }, 1000);
+      setTimeout(function(){
+        // stop game, next team
+        myElement.innerHTML = '0s';
+        clearInterval(v);
+      }, time * 1000);
+
     }
 
     function setupCard(nodeIndex, cardIndex) {
@@ -224,6 +243,7 @@
     }
 
     function scoreCard() {
+      score[currentTeam] = score[currentTeam] + 1;
       nextCard();
     }
 
@@ -297,7 +317,7 @@
   <p style="font-size: 12px;">To score card swipe to the right</p>
   <a role="button" class="pure-button" id="menu-btn" href="#">Menu</a>
   <a role="button" class="pure-button pure-button-primary" id="skip-btn" href="#">Skip Card</a>
-  <a role="button" class="pure-button" id="score-btn" href="#">Score</a>
+  <a role="button" class="pure-button" id="timer-btn" href="#">60s</a>
 
 </div>
 </body>
