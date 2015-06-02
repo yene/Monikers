@@ -29,3 +29,4 @@ babel script.js --watch --out-file script-compiled.js
 # Todo
 * viewport fix
 * try to use ES6 and convert
+* animate the game setup

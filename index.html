@@ -8,13 +8,24 @@
   <link rel="stylesheet" href="/pure-min.css">
   <link rel="stylesheet" href="/style.css">
   <script src="/hammer.min.js"></script>
-  <script src="/script-compiled.js"></script>
   <script>
+    var cards;
+    var currentCard = 0;
+
+    var teamA = {score: 0, players: 2};
+    var teamB = {score: 0, players: 2};
+    var teams = [teamA, teamB];
+    var currentTeam = 0;
+
     var playerCount = 4;
     var timeLimit = 60;
-    document.addEventListener('DOMContentLoaded', function() {
-      var e = document.getElementById('player-count');
 
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('start-game');
+      btn.addEventListener('click', function() {
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('table').style.display = 'block';
+      });
     });
 
     function updateSetup() {
@@ -25,6 +36,8 @@
       if (playerCount % 2 != 0 ) {
         var a = Math.floor(playerCount / 2);
         var b = a+1;
+        teams[0].players = a;
+        teams[1].players = b;
         t.innerHTML = 'Make two groups with ' + a + ' and ' + b + ' players, <br> the group with ' + a +  ' players goes first.';
       } else {
         t.innerHTML = 'Make two groups with equal amount players.';
@@ -32,6 +45,7 @@
     }
 
   </script>
+  <script src="/script-compiled.js"></script>
 </head>
 <body>
 
@@ -39,7 +53,7 @@
 <div id="start-screen">
   <h1>Monikers</h1>
   <p>This game requires 4 players or more.</p>
-  <form class="pure-form pure-form-aligned">
+  <div class="pure-form pure-form-aligned">
       <fieldset>
           <div class="pure-control-group">
               <label for="player-count">Player Count:</label>
@@ -52,9 +66,9 @@
           </div>
 
           <p id="group-text">Make two groups with equal amount players.</p>
-          <button type="submit" class="pure-button pure-button-primary">Start Game</button>
+          <button id="start-game" type="button" class="pure-button pure-button-primary">Start Game</button>
       </fieldset>
-  </form>
+  </div>
 </div>
 
 <div id="table">
