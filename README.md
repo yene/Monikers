@@ -30,3 +30,4 @@ babel script.js --watch --out-file script-compiled.js
 * viewport fix
 * try to use ES6 and convert
 * animate the game setup
+* add pause when click on the timer

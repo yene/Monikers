@@ -8,12 +8,15 @@ var currentTeam = 0;
 
 var playerCount = 4;
 var timeLimit = 60;
+var timer;
 
 document.addEventListener('DOMContentLoaded', function() {
   var btn = document.getElementById('start-game');
   btn.addEventListener('click', function() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
+    document.getElementById('timer-btn').innerHTML = timeLimit + 's';
+    start();
   });
 
   // TODO: loading could be optimized
@@ -22,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // setup buttons
   var e = document.getElementById('menu-btn');
   e.addEventListener("click", function() {
-    console.log("got to menu");
+    location.reload();
   });
   var e = document.getElementById('skip-btn');
   e.addEventListener("click", function() {
@@ -38,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         scoreCard();
       }
   });
-  start();
 });
 
 function getCards() {
@@ -60,9 +62,9 @@ function getCards() {
 }
 
 function start() {
-  var time = 60;
+  var time = timeLimit;
   var myElement = document.getElementById('timer-btn');
-  var v = setInterval(function() {
+  timer = setInterval(function() {
     time--;
     myElement.innerHTML = time + 's';
   }, 1000);
@@ -70,7 +72,8 @@ function start() {
     // stop game, next team
     myElement.innerHTML = '0s';
     clearInterval(v);
-  }, time * 1000);
+    console.log('stop, next teams turn');
+  }, timeLimit * 1000);
 
 }
 
@@ -127,7 +130,7 @@ function nextCard() {
 }
 
 function scoreCard() {
-  score[currentTeam] = score[currentTeam] + 1;
+  teams[currentTeam].score = teams[currentTeam].score + 1;
   nextCard();
 }
 
