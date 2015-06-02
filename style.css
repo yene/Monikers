@@ -3,6 +3,7 @@ html, body, main {
   height: 100%;
   width: 320px;
   overflow-x: hidden;
+  border: 1px solid red;
 }
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
@@ -21,7 +22,6 @@ body {
 }
 
 #table {
-  height: 400px;
   width: 800px;
   background-color: rgba(157, 173, 182, 1);
   overflow: hidden;
@@ -106,6 +106,7 @@ body {
 
 #menu {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 #menu > a {
