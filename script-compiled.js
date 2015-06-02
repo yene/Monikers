@@ -2,12 +2,22 @@
 
 var cards;
 var currentCard = 0;
-var score = [0, 0];
+
+var teamA = { score: 0, players: 2 };
+var teamB = { score: 0, players: 2 };
+var teams = [teamA, teamB];
 var currentTeam = 0;
-var teamA = 0;
-var teamB = 1;
+
+var playerCount = 4;
+var timeLimit = 60;
 
 document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('start-game');
+  btn.addEventListener('click', function () {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('table').style.display = 'block';
+  });
+
   // TODO: loading could be optimized
   getCards();
 
@@ -124,4 +134,20 @@ function scoreCard() {
 
 function skipCard() {
   nextCard();
+}
+
+function updateSetup() {
+  playerCount = document.getElementById('player-count').value;
+  timeLimit = document.getElementById('time-limit').value;
+
+  var t = document.getElementById('group-text');
+  if (playerCount % 2 != 0) {
+    var a = Math.floor(playerCount / 2);
+    var b = a + 1;
+    teams[0].players = a;
+    teams[1].players = b;
+    t.innerHTML = 'Make two groups with ' + a + ' and ' + b + ' players, <br> the group with ' + a + ' players goes first.';
+  } else {
+    t.innerHTML = 'Make two groups with equal amount players.';
+  }
 }
