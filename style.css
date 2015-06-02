@@ -21,7 +21,17 @@ body {
   background-color: rgba(157, 173, 182, 0.5);
 }
 
+/* START */
+#start-screen {
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+}
+
+
+/* GAME */
 #table {
+  display: none;
   width: 800px;
   background-color: rgba(157, 173, 182, 1);
   overflow: hidden;
@@ -112,3 +122,4 @@ body {
 #menu > a {
   margin-left: 5px;
 }
+
