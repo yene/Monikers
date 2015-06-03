@@ -31,3 +31,6 @@ babel script.js --watch --out-file script-compiled.js
 * try to use ES6 and convert
 * animate the game setup
 * add pause when click on the timer
+* add "A dumb party game
+that respects your intelligence."
+* Rounds

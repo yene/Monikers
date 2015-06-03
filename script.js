@@ -1,3 +1,4 @@
+var allCards;
 var cards;
 var currentCard = 0;
 
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
     document.getElementById('timer-btn').innerHTML = timeLimit + 's';
+    setup();
     start();
   });
 
@@ -48,9 +50,7 @@ function getCards() {
   request.open('GET', '/cards.json', true);
   request.onload = function() {
     if (this.status >= 200 && this.status < 400) {
-      cards = JSON.parse(this.response);
-      setupCard(1, currentCard);
-      setupCard(2, currentCard + 1);
+      allCards = JSON.parse(this.response);
     } else {
       console.log("We reached our target server, but it returned an error");
     }
@@ -138,7 +138,7 @@ function skipCard() {
   nextCard();
 }
 
-function updateSetup() {
+function updateSettings() {
   playerCount = document.getElementById('player-count').value;
   timeLimit = document.getElementById('time-limit').value ;
 
@@ -153,3 +153,37 @@ function updateSetup() {
     t.innerHTML = 'Make two groups with equal amount players.';
   }
 }
+
+function setup() {
+  // shuffle cards
+  allCards = shuffle(allCards);
+
+  // deal 8 cards to each player, and pick 5
+  cards = [];
+  for (var i=0;i<playerCount;i++) {
+    for (var j=0;j<5;j++) {
+      var n = Math.floor((Math.random() * allCards.length));
+      allCards.splice(n, 1);
+      cards.push(allCards[n]);
+    }
+  }
+
+  // shuffle into one deck
+  cards = shuffle(cards);
+
+  setupCard(1, currentCard);
+  setupCard(2, currentCard + 1);
+
+}
+
+function shuffle(c) {
+  var l = c.length;
+  for (var i = l-1; i > 0; i--) {
+    var n = Math.floor((Math.random() * i));
+    var temp = c[i];
+    c[i] = c[n];
+    c[n] = temp;
+  }
+  return c;
+}
+
