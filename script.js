@@ -71,7 +71,7 @@ function start() {
   setTimeout(function(){
     // stop game, next team
     myElement.innerHTML = '0s';
-    clearInterval(v);
+    clearInterval(timer);
     console.log('stop, next teams turn');
   }, timeLimit * 1000);
 
