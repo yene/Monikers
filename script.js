@@ -1,5 +1,6 @@
-var allCards;
-var cards;
+var completeDeck = [];
+var deck = [];
+var cards = [];
 var currentCard = 0;
 
 var teamA = {score: 0, players: 2};
@@ -8,8 +9,9 @@ var teams = [teamA, teamB];
 var currentTeam = 0;
 
 var playerCount = 4;
-var timeLimit = 60;
+var timeLimit = 5;
 var timer;
+var timeout;
 
 document.addEventListener('DOMContentLoaded', function() {
   var btn = document.getElementById('start-game');
@@ -50,7 +52,7 @@ function getCards() {
   request.open('GET', '/cards.json', true);
   request.onload = function() {
     if (this.status >= 200 && this.status < 400) {
-      allCards = JSON.parse(this.response);
+      completeDeck = JSON.parse(this.response);
     } else {
       console.log("We reached our target server, but it returned an error");
     }
@@ -68,7 +70,7 @@ function start() {
     time--;
     myElement.innerHTML = time + 's';
   }, 1000);
-  setTimeout(function(){
+  timeout = setTimeout(function(){
     // stop game, next team
     myElement.innerHTML = '0s';
     clearInterval(timer);
@@ -78,6 +80,11 @@ function start() {
 }
 
 function setupCard(nodeIndex, cardIndex) {
+  if (cards.length-1 < cardIndex) {
+    console.log('not enough cards');
+    return;
+  }
+
   var card = cards[cardIndex];
   document.querySelector('#card-' + nodeIndex + ' h1').innerHTML = card.Person;
   document.querySelector('#card-' + nodeIndex + ' p').innerHTML = card.Text;
@@ -131,6 +138,12 @@ function nextCard() {
 
 function scoreCard() {
   teams[currentTeam].score = teams[currentTeam].score + cards[currentCard].Points;
+
+  if (cards.length == 1) {
+    nextRound();
+    return;
+  }
+
   cards.splice(currentCard, 1);
   currentCard--;
   nextCard();
@@ -168,25 +181,29 @@ function updateSettings() {
 }
 
 function setup() {
-  // shuffle cards
-  allCards = shuffle(allCards);
-
+  var tmp = shuffle(completeDeck);
   // deal 8 cards to each player, and pick 5
-  cards = [];
   for (var i=0;i<playerCount;i++) {
     for (var j=0;j<5;j++) {
-      var n = Math.floor((Math.random() * allCards.length));
-      allCards.splice(n, 1);
-      cards.push(allCards[n]);
+      var n = Math.floor((Math.random() * tmp.length));
+      tmp.splice(n, 1);
+      deck.push(tmp[n]);
     }
   }
 
-  // shuffle into one deck
-  cards = shuffle(cards);
-
+  cards = shuffle(deck).slice(0);
   setupCard(1, currentCard);
   setupCard(2, currentCard + 1);
+}
 
+function nextRound() {
+  clearInterval(timer);
+  clearTimeout(timeout);
+  alert('first round over, teamA scored X, teamB scored Y, new Rules: xyjasdkhjasdkjasd');
+  cards = shuffle(deck).slice(0);
+  setupCard(1, currentCard);
+  setupCard(2, currentCard + 1);
+  start();
 }
 
 function shuffle(c) {
