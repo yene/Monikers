@@ -132,6 +132,7 @@ function nextCard() {
 function scoreCard() {
   teams[currentTeam].score = teams[currentTeam].score + cards[currentCard].Points;
   cards.splice(currentCard, 1);
+  currentCard--;
   nextCard();
 }
 
