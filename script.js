@@ -72,9 +72,9 @@ function start() {
     // stop game, next team
     myElement.innerHTML = '0s';
     clearInterval(timer);
-    console.log('stop, next teams turn');
-  }, timeLimit * 1000);
+    nextPlayer();
 
+  }, timeLimit * 1000);
 }
 
 function setupCard(nodeIndex, cardIndex) {
@@ -130,12 +130,24 @@ function nextCard() {
 }
 
 function scoreCard() {
-  teams[currentTeam].score = teams[currentTeam].score + 1;
+  teams[currentTeam].score = teams[currentTeam].score + cards[currentCard].Points;
+  cards.splice(currentCard, 1);
   nextCard();
 }
 
 function skipCard() {
   nextCard();
+}
+
+function nextPlayer() {
+  currentTeam = currentTeam === 0 ? 1 : 0;
+  // reshuffel all skipped cards
+  currentCard = 0;
+  cards = shuffle(cards);
+  setupCard(1, currentCard);
+  setupCard(2, currentCard + 1);
+  console.log('stop, next teams turn');
+  start();
 }
 
 function updateSettings() {

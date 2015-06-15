@@ -74,7 +74,7 @@ function start() {
     // stop game, next team
     myElement.innerHTML = '0s';
     clearInterval(timer);
-    console.log('stop, next teams turn');
+    nextPlayer();
   }, timeLimit * 1000);
 }
 
@@ -86,19 +86,19 @@ function setupCard(nodeIndex, cardIndex) {
   document.querySelector('#card-' + nodeIndex + ' .points-value').innerHTML = card.Points;
 
   switch (card.Points) {
-    case '1':
+    case 1:
       document.querySelector('#card-' + nodeIndex + ' .genre').style.color = '#54b899';
       document.querySelector('#card-' + nodeIndex + ' .points').style.background = '#54b899';
       break;
-    case '2':
+    case 2:
       document.querySelector('#card-' + nodeIndex + ' .genre').style.color = '#15ace5';
       document.querySelector('#card-' + nodeIndex + ' .points').style.background = '#15ace5';
       break;
-    case '3':
+    case 3:
       document.querySelector('#card-' + nodeIndex + ' .genre').style.color = '#8f66a5';
       document.querySelector('#card-' + nodeIndex + ' .points').style.background = '#8f66a5';
       break;
-    case '4':
+    case 4:
       document.querySelector('#card-' + nodeIndex + ' .genre').style.color = '#e84735';
       document.querySelector('#card-' + nodeIndex + ' .points').style.background = '#e84735';
       break;
@@ -131,12 +131,24 @@ function nextCard() {
 }
 
 function scoreCard() {
-  teams[currentTeam].score = teams[currentTeam].score + 1;
+  teams[currentTeam].score = teams[currentTeam].score + cards[currentCard].Points;
+  cards.splice(currentCard, 1);
   nextCard();
 }
 
 function skipCard() {
   nextCard();
+}
+
+function nextPlayer() {
+  currentTeam = currentTeam === 0 ? 1 : 0;
+  // reshuffel all skipped cards
+  currentCard = 0;
+  cards = shuffle(cards);
+  setupCard(1, currentCard);
+  setupCard(2, currentCard + 1);
+  console.log('stop, next teams turn');
+  start();
 }
 
 function updateSettings() {
