@@ -85,19 +85,19 @@ function setupCard(nodeIndex, cardIndex) {
   document.querySelector('#card-' + nodeIndex + ' .points-value').innerHTML = card.Points;
 
   switch (card.Points) {
-    case "1":
+    case 1:
       document.querySelector('#card-' + nodeIndex + ' .genre').style.color = "#54b899";
       document.querySelector('#card-' + nodeIndex + ' .points').style.background = "#54b899";
       break;
-    case "2":
+    case 2:
       document.querySelector('#card-' + nodeIndex + ' .genre').style.color = "#15ace5";
       document.querySelector('#card-' + nodeIndex + ' .points').style.background = "#15ace5";
       break;
-    case "3":
+    case 3:
       document.querySelector('#card-' + nodeIndex + ' .genre').style.color = "#8f66a5";
       document.querySelector('#card-' + nodeIndex + ' .points').style.background = "#8f66a5";
       break;
-    case "4":
+    case 4:
       document.querySelector('#card-' + nodeIndex + ' .genre').style.color = "#e84735";
       document.querySelector('#card-' + nodeIndex + ' .points').style.background = "#e84735";
       break;
