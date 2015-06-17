@@ -160,8 +160,13 @@ function nextPlayer() {
   cards = shuffle(cards);
   setupCard(1, currentCard);
   setupCard(2, currentCard + 1);
-  console.log('stop, next teams turn');
-  start();
+  swal({
+    title: "Stop, next teams turn",
+    text: "something about the rules",
+    }, function(){
+      start();
+    }
+  )
 }
 
 function updateSettings() {
@@ -199,11 +204,16 @@ function setup() {
 function nextRound() {
   clearInterval(timer);
   clearTimeout(timeout);
-  alert('first round over, teamA scored X, teamB scored Y, new Rules: xyjasdkhjasdkjasd');
-  cards = shuffle(deck).slice(0);
-  setupCard(1, currentCard);
-  setupCard(2, currentCard + 1);
-  start();
+  swal({
+    title: "Round X is over.",
+    text: "teamA scored X, teamB scored Y, new Rules: xyjasdkhjasdkjasd",
+    }, function() {
+      cards = shuffle(deck).slice(0);
+      setupCard(1, currentCard);
+      setupCard(2, currentCard + 1);
+      start();
+    }
+  )
 }
 
 function shuffle(c) {
