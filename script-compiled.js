@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function () {
   getCards();
 
   // setup buttons
-  var e = document.getElementById('menu-btn');
+  var e = document.getElementById('score-btn');
   e.addEventListener('click', function () {
-    location.reload();
+    scoreCard();
   });
   var e = document.getElementById('skip-btn');
   e.addEventListener('click', function () {
