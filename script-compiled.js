@@ -15,6 +15,9 @@ var timeLimit = 5;
 var timer;
 var timeout;
 
+var round = 0;
+var roundRules = ['Use ANY WORDS except the name itself, including other card text', 'Use only ONE WORD', 'NO LANGUAGE allowed, only physical gestures and imitations.', 'Only use your hands.', 'No words, no movement, just a singular noise.'];
+
 document.addEventListener('DOMContentLoaded', function () {
   var btn = document.getElementById('start-game');
   btn.addEventListener('click', function () {
@@ -163,7 +166,7 @@ function nextPlayer() {
   setupCard(2, currentCard + 1);
   swal({
     title: 'Stop, next teams turn',
-    text: 'something about the rules' }, function () {
+    text: 'Teams take turns giving clues. Each player must take a turn as the clue giver before any teammates repeats the role.' }, function () {
     start();
   });
 }
@@ -201,11 +204,12 @@ function setup() {
 }
 
 function nextRound() {
+  round++;
   clearInterval(timer);
   clearTimeout(timeout);
   swal({
-    title: 'Round X is over.',
-    text: 'teamA scored X, teamB scored Y, new Rules: xyjasdkhjasdkjasd' }, function () {
+    title: 'Round ' + round + ' is over.',
+    text: 'Rules for next Round:\n' + roundRules[round] }, function () {
     cards = shuffle(deck).slice(0);
     setupCard(1, currentCard);
     setupCard(2, currentCard + 1);

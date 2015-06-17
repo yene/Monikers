@@ -17,8 +17,6 @@ babel script.js --watch --out-file script-compiled.js
 * add play/pause when click on the timer
 * add "A dumb party game
 that respects your intelligence."
-* Rounds
-* secret round 4 rounds (just with your hands - No words, no movement, just a singular noise.)
 
 
 # Notes
