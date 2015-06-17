@@ -9,9 +9,8 @@ var teams = [teamA, teamB];
 var currentTeam = 0;
 
 var playerCount = 4;
-var timeLimit = 5;
+var timeLimit = 60;
 var timer;
-var timeout;
 
 var round = 0;
 var roundRules = ['Use ANY WORDS except the name itself, including other card text',
@@ -35,13 +34,18 @@ document.addEventListener('DOMContentLoaded', function() {
   getCards();
 
   // setup buttons
-  var e = document.getElementById('score-btn');
-  e.addEventListener("click", function() {
+  var scorebtn = document.getElementById('score-btn');
+  scorebtn.addEventListener("click", function() {
     scoreCard();
   });
-  var e = document.getElementById('skip-btn');
-  e.addEventListener("click", function() {
+  var skipbtn = document.getElementById('skip-btn');
+  skipbtn.addEventListener("click", function() {
     skipCard();
+  });
+  var timerbtn = document.getElementById('timer-btn');
+  timerbtn.addEventListener("click", function() {
+    timerbtn.innerHTML = '&#10074;&#10074;';
+    timer.toggle();
   });
 
   // setup swipe handler
@@ -74,16 +78,13 @@ function getCards() {
 function start() {
   var time = timeLimit;
   var myElement = document.getElementById('timer-btn');
-  timer = setInterval(function() {
+  timer = new Timer(function() {
     time--;
     myElement.innerHTML = time + 's';
-  }, 1000);
-  timeout = setTimeout(function(){
-    // stop game, next team
+  }, function() {
     myElement.innerHTML = '0s';
-    clearInterval(timer);
     nextPlayer();
-
+    timer.pause();
   }, timeLimit * 1000);
 }
 
@@ -211,8 +212,7 @@ function setup() {
 
 function nextRound() {
   round++;
-  clearInterval(timer);
-  clearTimeout(timeout);
+  timer.pause();
   swal({
     title: 'Round ' + round + ' is over.',
     text: 'Rules for next Round:\n' + roundRules[round],
@@ -234,5 +234,35 @@ function shuffle(c) {
     c[n] = temp;
   }
   return c;
+}
+
+function Timer(cbUpdate, cbEnd, delay) {
+  var timeoutId, timerId, start, paused, remaining = delay;
+
+  this.toggle = function() {
+    if (paused) {
+      this.resume();
+    } else {
+      this.pause();
+    }
+  }
+
+  this.pause = function() {
+    paused = true;
+    window.clearTimeout(timeoutId);
+    window.clearInterval(timerId);
+    remaining -= new Date() - start;
+  };
+
+  this.resume = function() {
+    paused = false;
+    start = new Date();
+    window.clearTimeout(timeoutId);
+    window.clearInterval(timerId);
+    timeoutId = window.setTimeout(cbEnd, remaining);
+    timerId = window.setInterval(cbUpdate, 1000);
+  };
+
+  this.resume();
 }
 
