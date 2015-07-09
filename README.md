@@ -20,6 +20,8 @@ babel script.js --watch --out-file script-compiled.js
 * manifest file
 * favicon, apple touch icons
 * maybe use font awesome icons http://stackoverflow.com/questions/22885702/html-for-the-pause-symbol-in-a-video-control
+* swipe down = score card
+* when card is scored do a swipe down animation
 
 # Notes
 Safari view is smaller than the screen, min 740px
