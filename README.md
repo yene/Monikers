@@ -1,15 +1,15 @@
-# start local server
-```
-python -m SimpleHTTPServer
-```
+# Monikers card game
+This is a prototype to find a way to make a card game in the browser that feels good. The bar is set by the game Hearthstone with its fluid drag movements and playful animations.
 
 # babel convert js
 ```
 babel script.js --watch --out-file script-compiled.js
 ```
 
+# Decisions
+* Add buttons to control the game or use swipe gestures. Swipe gestures require a small tutorial but give you more screen space.
+
 # Todo
-* swipe sucks
 * let persons select 5 of 8 cards
 * change viewport -> stretch app on phones, fix width on desktop
 * dynamic card size, font should increase on bigger phones
@@ -23,10 +23,10 @@ babel script.js --watch --out-file script-compiled.js
 * swipe down = score card
 * when card is scored do a swipe down animation
 
-# Notes
+# Mobile Safari View Size
 Safari view is smaller than the screen, min 740px
 http://stackoverflow.com/questions/24889100/ios-8-removed-minimal-ui-viewport-property-are-there-other-soft-fullscreen
 
-# used code
+# third party code
 * http://t4t5.github.io/sweetalert/
 * purecss.io
