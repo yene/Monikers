@@ -1,6 +1,8 @@
 # Monikers card game
 This is a prototype to find a way to make a card game in the browser that feels good. The bar is set by the game Hearthstone with its fluid drag movements and playful animations.
 
+![screenshot](screenshot.png)
+
 # babel convert js
 ```
 babel script.js --watch --out-file script-compiled.js
