@@ -1,13 +1,13 @@
 
 html, body, main {
   height: 100%;
-  width: 320px;
+  margin: 0;
   overflow-x: hidden;
-  border: 1px solid red;
 }
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
+  background-color: rgba(157, 173, 182, 0.3);
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -17,8 +17,9 @@ body {
   /* best helvetica */
   font-family: "Gotham Rounded A", sans-serif;
   font-weight: 300;
-  margin: 0;
   background-color: rgba(157, 173, 182, 0.5);
+  width: 320px;
+  max-height: 460px;
 }
 
 /* START */
