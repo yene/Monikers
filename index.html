@@ -12,31 +12,11 @@
   <script src="/app.js"></script>
   <script src="dist/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="start-screen.html"
 </head>
 <body>
-
-<div id="start-screen">
-  <h1>Monikers</h1>
-  <p>A dumb party game that respects your intelligence.</p>
-
-  <div class="pure-form pure-form-aligned">
-      <fieldset>
-          <div class="pure-control-group">
-              <label for="player-count">Player Count:</label>
-              <input id="player-count" type="number" min="4" max="20" value="4" onchange="updateSettings()">
-          </div>
-
-          <div class="pure-control-group">
-              <label for="time-limit">Time Limit:</label>
-              <input id="time-limit" type="number" min="60" max="99" value="60" onchange="updateSettings()">
-          </div>
-
-          <p id="group-text">Make two groups with equal amount players.</p>
-          <button id="start-game" type="button" class="pure-button pure-button-primary">Start Game</button>
-          <p><a style="font-size: 12px; text-decoration: none;" href="rules.pdf">Rules PDF</a></p>
-      </fieldset>
-  </div>
-</div>
+<start-screen></start-screen>
 
 <div id="table">
   <div class="card" id="card-0">

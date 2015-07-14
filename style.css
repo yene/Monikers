@@ -22,14 +22,6 @@ body {
   max-height: 460px;
 }
 
-/* START */
-#start-screen {
-  padding-left: 5px;
-  padding-right: 5px;
-  text-align: center;
-}
-
-
 /* GAME */
 #table {
   display: none;

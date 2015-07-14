@@ -1,0 +1,53 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="start-screen">
+  <style>
+    :host {
+      text-align: center;
+    }
+    :host > div {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+  </style>
+
+
+  <template>
+    <div>
+      <h1>Monikers</h1>
+      <p>A dumb party game that respects your intelligence.</p>
+
+      <div class="pure-form pure-form-aligned">
+          <fieldset>
+              <div class="pure-control-group">
+                  <label for="player-count">Player Count:</label>
+                  <input id="player-count" type="number" min="4" max="20" value="4" onchange="updateSettings()">
+              </div>
+
+              <div class="pure-control-group">
+                  <label for="time-limit">Time Limit:</label>
+                  <input id="time-limit" type="number" min="60" max="99" value="60" onchange="updateSettings()">
+              </div>
+
+              <p id="group-text">Make two groups with equal amount players.</p>
+              <button id="start-game" type="button" class="pure-button pure-button-primary">Start Game</button>
+              <p><a style="font-size: 12px; text-decoration: none;" href="rules.pdf">Rules PDF</a></p>
+          </fieldset>
+      </div>
+    </div>
+  </template>
+
+
+
+  <script>
+    // register a new element called proto-element
+    Polymer({
+      is: "start-screen",
+      // add a callback to the element's prototype
+      ready: function() {
+        //this.textContent = "I'm a proto-element. Check out my prototype!"
+      }
+    });
+  </script>
+
+</dom-module>
