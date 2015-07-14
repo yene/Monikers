@@ -6,8 +6,8 @@
       text-align: center;
     }
     :host > div {
-      margin-left: 5px;
-      margin-right: 5px;
+      margin-left: 10px;
+      margin-right: 10px;
     }
   </style>
 
@@ -18,21 +18,21 @@
       <p>A dumb party game that respects your intelligence.</p>
 
       <div class="pure-form pure-form-aligned">
-          <fieldset>
-              <div class="pure-control-group">
-                  <label for="player-count">Player Count:</label>
-                  <input id="player-count" type="number" min="4" max="20" value="4" onchange="updateSettings()">
-              </div>
+        <fieldset>
+          <div class="pure-control-group">
+            <label for="player-count">Player Count:</label>
+            <input id="player-count" type="number" min="4" max="20" value="{{playerCount::change}}">
+          </div>
 
-              <div class="pure-control-group">
-                  <label for="time-limit">Time Limit:</label>
-                  <input id="time-limit" type="number" min="60" max="99" value="60" onchange="updateSettings()">
-              </div>
+          <div class="pure-control-group">
+            <label for="time-limit">Time Limit:</label>
+            <input id="time-limit" type="number" min="60" max="99" value="{{timeLimit::change}}">
+          </div>
 
-              <p id="group-text">Make two groups with equal amount players.</p>
-              <button id="start-game" type="button" class="pure-button pure-button-primary">Start Game</button>
-              <p><a style="font-size: 12px; text-decoration: none;" href="rules.pdf">Rules PDF</a></p>
-          </fieldset>
+          <p id="group-text">{{groupText}}</p>
+          <button id="start-game" type="button" class="pure-button pure-button-primary">Start Game</button>
+          <p><a style="font-size: 12px; text-decoration: none;" href="rules.pdf">Rules PDF</a></p>
+        </fieldset>
       </div>
     </div>
   </template>
@@ -43,6 +43,34 @@
     // register a new element called proto-element
     Polymer({
       is: "start-screen",
+      properties: {
+        playerCount: {
+          type: Number,
+          value: 4,
+          observer: '_updateText'
+        },
+        timeLimit: {
+          type: Number,
+          value: 60,
+        }
+      },
+
+      _updateText: function() {
+        if (this.playerCount % 2 != 0 ) {
+          var a = Math.floor(this.playerCount / 2);
+          var b = a+1;
+          teams[0].players = a;
+          teams[1].players = b;
+          this.groupText = 'Make two groups with ' + a + ' and ' + b + ' players, \n the group with ' + a +  ' players goes first.';
+        } else {
+          this.groupText = 'Make two groups with equal amount players.';
+        }
+      },
+
+      _yay: function(response) {
+        //this._setResponse(response);
+        console.log(response);
+      },
       // add a callback to the element's prototype
       ready: function() {
         //this.textContent = "I'm a proto-element. Check out my prototype!"
