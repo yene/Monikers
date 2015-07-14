@@ -1,3 +1,13 @@
+<!--
+Start Screen
+When clicked on start button it fires event containing the time limit and player count.
+
+document.querySelector('start-screen').addEventListener('start', function(e) {
+  console.log(e.type, e.detail.timeLimit, e.detail.playerCount); // "ouch" "That hurt!"
+});
+-->
+
+
 <link rel="import" href="bower_components/polymer/polymer.html">
 
 <dom-module id="start-screen">
@@ -10,7 +20,6 @@
       margin-right: 10px;
     }
   </style>
-
 
   <template>
     <div>
@@ -30,14 +39,12 @@
           </div>
 
           <p id="group-text">{{groupText}}</p>
-          <button id="start-game" type="button" class="pure-button pure-button-primary">Start Game</button>
+          <button type="button" class="pure-button pure-button-primary" on-click="handleClick">Start Game</button>
           <p><a style="font-size: 12px; text-decoration: none;" href="rules.pdf">Rules PDF</a></p>
         </fieldset>
       </div>
     </div>
   </template>
-
-
 
   <script>
     // register a new element called proto-element
@@ -54,6 +61,9 @@
           value: 60,
         }
       },
+      handleClick: function() {
+        this.fire('start', {playerCount: this.playerCount, timeLimit: this.timeLimit});
+      },
 
       _updateText: function() {
         if (this.playerCount % 2 != 0 ) {
@@ -66,15 +76,6 @@
           this.groupText = 'Make two groups with equal amount players.';
         }
       },
-
-      _yay: function(response) {
-        //this._setResponse(response);
-        console.log(response);
-      },
-      // add a callback to the element's prototype
-      ready: function() {
-        //this.textContent = "I'm a proto-element. Check out my prototype!"
-      }
     });
   </script>
 
