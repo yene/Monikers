@@ -21,9 +21,11 @@ var roundRules = ['Use ANY WORDS except the name itself, including other card te
 ];
 
 document.addEventListener('DOMContentLoaded', function() {
-  var btn = document.getElementById('start-game');
-  btn.addEventListener('click', function() {
-    document.getElementById('start-screen').style.display = 'none';
+  document.querySelector('start-screen').addEventListener('start', function(e) {
+    console.log(e.type, e.detail.timeLimit, e.detail.playerCount);
+    playerCount = e.detail.playerCount;
+    timeLimit = e.detail.timeLimit;
+    document.querySelector('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
     document.getElementById('timer-btn').innerHTML = timeLimit + 's';
     setup();
