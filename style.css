@@ -28,17 +28,24 @@ start-screen {
 
 /* GAME */
 #table {
-  width: 260px;
+  width: 100%;
+  max-width: 300px;
   height: 400px;
   background-color: red; //rgba(157, 173, 182, 1);
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  /*margin-left: -230px;*/
   scroll-snap-type: mandatory;
-  scroll-snap-points-x: repeat(260px);
+  -webkit-scroll-snap-type: mandatory;
+
+  -webkit-scroll-snap-destination: 50% 50%;
+  scroll-snap-destination: 50% 50%;
 }
 
+moniker-card {
+  -webkit-scroll-snap-coordinate: 50% 50%;
+  scroll-snap-coordinate: 50% 50%;
+}
 
 .card-transform {
   transform: translateX(-260px);
