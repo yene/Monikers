@@ -32,3 +32,7 @@ http://stackoverflow.com/questions/24889100/ios-8-removed-minimal-ui-viewport-pr
 # third party code
 * http://t4t5.github.io/sweetalert/
 * purecss.io
+
+# scroll snap
+I learned you can use nowrap to prevent line breaks. And you have to be careful of space gaps, best to use flex.
+http://blog.gospodarets.com/css-scroll-snap/

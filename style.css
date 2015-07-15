@@ -1,8 +1,7 @@
 
 html, body, main {
   height: 100%;
-  margin: 0;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
@@ -14,11 +13,12 @@ html {
 }
 
 body {
+  margin: 0;
   /* best helvetica */
   font-family: "Gotham Rounded A", sans-serif;
   font-weight: 300;
   background-color: rgba(157, 173, 182, 0.5);
-  width: 320px;
+  /*width: 320px;*/
   max-height: 460px;
 }
 
@@ -28,12 +28,17 @@ start-screen {
 
 /* GAME */
 #table {
-  //display: none;
-  width: 800px;
-  background-color: rgba(157, 173, 182, 1);
-  overflow: hidden;
-  margin-left: -230px;
+  width: 260px;
+  height: 400px;
+  background-color: red; //rgba(157, 173, 182, 1);
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  /*margin-left: -230px;*/
+  scroll-snap-type: mandatory;
+  scroll-snap-points-x: repeat(260px);
 }
+
 
 .card-transform {
   transform: translateX(-260px);
