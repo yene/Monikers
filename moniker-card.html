@@ -7,91 +7,115 @@
 
 <dom-module id="moniker-card">
   <style>
-    :host {
-      display: inline-block;
-      margin: 10px;
-      position: relative;
-      padding: 20px;
-      /* 6x9 cm */
-      width: 240px;
-      height: 360px;
-      background-color: white;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
-    }
+  :host {
+    display: inline-block;
+    margin: 10px;
+  }
+  .card {
 
-    :host > h1 {
-      white-space: normal;
-      font-size: 18px;
-      margin-top: 26px;
-      margin-bottom: 23px;
-      font-weight: normal;
-      height: 46px;
-      line-height: 23px;
-    }
+    position: relative;
+    padding: 20px;
+    /* 6x9 cm */
+    width: 240px;
+    height: 360px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+  }
 
-    :host > p {
-      white-space: normal;
-      font-size: 12px;
-    }
+  .card > h1 {
+    white-space: normal;
+    font-size: 18px;
+    margin-top: 26px;
+    margin-bottom: 23px;
+    font-weight: normal;
+    height: 46px;
+    line-height: 23px;
+  }
 
-    :host > .line {
-      position: absolute;
-      bottom: 100px;
-      left: 70px;
-      width: 100px;
-      border-bottom: 2px dotted gray;
-    }
+  .card > p {
+    white-space: normal;
+    font-size: 12px;
+  }
 
-    :host > .genre {
-      text-transform: uppercase;
-      position: absolute;
-      bottom: 70px;
-      left: 20px;
-      width: 200px;
-      color: #62A591;
-      font-size: 10px;
-      letter-spacing: 2px;
-    }
+  .card > .line {
+    position: absolute;
+    bottom: 100px;
+    left: 70px;
+    width: 100px;
+    border-bottom: 2px dotted gray;
+  }
 
-    :host > .points {
-      position: absolute;
-      bottom: 0;
-      left: 90px;
-      color: white;
-      background-color: #62A591;
-      width: 60px;
-      height: 50px;
-      border-top-left-radius: 50%;
-      border-top-right-radius: 50%;
-      font-size: 20px;
-      padding-top: 5px;
-    }
+  .card > .genre {
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 70px;
+    left: 20px;
+    width: 200px;
+    color: #62A591;
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
 
-    :host > .points > .points-label {
-      text-transform: uppercase;
-      font-size: 8px;
-    }
+  .card > .points {
+    position: absolute;
+    bottom: 0;
+    left: 90px;
+    color: white;
+    background-color: #62A591;
+    width: 60px;
+    height: 50px;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    font-size: 20px;
+    padding-top: 5px;
+  }
+
+  .card > .points > .points-label {
+    text-transform: uppercase;
+    font-size: 8px;
+  }
+
+  .button-success {
+    background: rgb(28, 184, 65); /* this is a green */
+  }
+
+  .button-error {
+    margin-right: 10px;
+    background: rgb(202, 60, 60); /* this is a maroon */
+  }
+
+  .control {
+    text-align: center;
+    margin-top: 10px;
+  }
+
   </style>
 
   <template>
-    <h1>Bob Ross</h1>
-    <p>
-      A painter and TV host, who starred
-      in PBS's The Joy of Painting. He
-      taught viewers how to paint "fluffy
-      white clouds" and "happy little
-      trees" using wet on wet painting. He
-      supposedly hated his white-guy afro
-      and kept it only for marketing
-      purposes.
-    </p>
-    <div class="line"></div>
-    <div class="genre">Celebrities</div>
-    <div class="points">
-      <span class="points-value">2</span>
-      <div class="points-label">Point</div>
+    <div class="card">
+      <h1>Bob Ross</h1>
+      <p>
+        A painter and TV host, who starred
+        in PBS's The Joy of Painting. He
+        taught viewers how to paint "fluffy
+        white clouds" and "happy little
+        trees" using wet on wet painting. He
+        supposedly hated his white-guy afro
+        and kept it only for marketing
+        purposes.
+      </p>
+      <div class="line"></div>
+      <div class="genre">Celebrities</div>
+      <div class="points">
+        <span class="points-value">2</span>
+        <div class="points-label">Point</div>
+      </div>
+    </div>
+    <div class="control">
+      <button class="button-error pure-button"><img src="img/x.svg" height="25" width="25"></button>
+      <button class="button-success pure-button"><img src="img/check.svg" height="25" width="25"></button>
     </div>
   </template>
 

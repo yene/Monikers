@@ -30,8 +30,8 @@ start-screen {
 #table {
   width: 100%;
   max-width: 300px;
-  height: 400px;
-  background-color: red; //rgba(157, 173, 182, 1);
+  height: 460px;
+  background-color: rgba(157, 173, 182, 1);
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
