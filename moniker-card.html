@@ -1,0 +1,103 @@
+<!--
+
+-->
+
+
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="moniker-card">
+  <style>
+    :host {
+      float: left;
+      margin: 10px;
+      position: relative;
+      padding: 20px;
+      /* 6x9 cm */
+      width: 240px;
+      height: 360px;
+      background-color: white;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.75);
+    }
+
+    :host > h1 {
+      font-size: 18px;
+      margin-top: 26px;
+      margin-bottom: 23px;
+      font-weight: normal;
+      height: 46px;
+      line-height: 23px;
+    }
+
+    :host > p {
+      font-size: 12px;
+    }
+
+    :host > .line {
+      position: absolute;
+      bottom: 100px;
+      left: 70px;
+      width: 100px;
+      border-bottom: 2px dotted gray;
+    }
+
+    :host > .genre {
+      text-transform: uppercase;
+      position: absolute;
+      bottom: 70px;
+      left: 20px;
+      width: 200px;
+      color: #62A591;
+      font-size: 10px;
+      letter-spacing: 2px;
+    }
+
+    :host > .points {
+      position: absolute;
+      bottom: 0;
+      left: 90px;
+      color: white;
+      background-color: #62A591;
+      width: 60px;
+      height: 50px;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      font-size: 20px;
+      padding-top: 5px;
+    }
+
+    :host > .points > .points-label {
+      text-transform: uppercase;
+      font-size: 8px;
+    }
+  </style>
+
+  <template>
+    <h1>Bob Ross</h1>
+    <p>
+      A painter and TV host, who starred
+      in PBS's The Joy of Painting. He
+      taught viewers how to paint "fluffy
+      white clouds" and "happy little
+      trees" using wet on wet painting. He
+      supposedly hated his white-guy afro
+      and kept it only for marketing
+      purposes.
+    </p>
+    <div class="line"></div>
+    <div class="genre">Celebrities</div>
+    <div class="points">
+      <span class="points-value">2</span>
+      <div class="points-label">Point</div>
+    </div>
+  </template>
+
+  <script>
+    // register a new element called proto-element
+    Polymer({
+      is: "moniker-card"
+    });
+  </script>
+
+</dom-module>
