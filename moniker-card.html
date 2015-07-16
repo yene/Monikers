@@ -11,8 +11,9 @@
     display: inline-block;
     margin: 10px;
   }
-  .card {
 
+  .card {
+    pointer-events: none;
     position: relative;
     padding: 20px;
     /* 6x9 cm */
@@ -104,8 +105,8 @@
       </div>
     </div>
     <div class="control">
-      <button class="button-error pure-button" on-tap="skip"><img src="img/x.svg" height="25" width="25"></button>
-      <button class="button-success pure-button" on-tap="identified"><img src="img/check.svg" height="25" width="25"></button>
+      <button class="button-error pure-button" id="x" on-tap="skip"><img src="img/x.svg" height="25" width="25"></button>
+      <button class="button-success pure-button" id="check" on-tap="identified"><img src="img/check.svg" height="25" width="25"></button>
     </div>
   </template>
 
@@ -120,10 +121,13 @@
         points: Number
       },
       skip: function(e) {
-        alert("x");
+        this.$.x.setAttribute('disabled', 'disabled');
+        this.$.x.style.marginRight = '0';
+        this.$.check.style.display = 'none';
       },
       identified: function(e) {
-        alert("check");
+        this.$.check.setAttribute('disabled', 'disabled');
+        this.$.x.style.display = 'none';
       },
 
       ready: function() {
