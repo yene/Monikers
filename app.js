@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('start-screen').addEventListener('start', function(e) {
     playerCount = e.detail.playerCount;
     timeLimit = e.detail.timeLimit;
+    var a = Math.floor(playerCount / 2);
+    var b = a+1;
+    teams[0].players = a;
+    teams[1].players = b;
+
     document.querySelector('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
     document.getElementById('timer-btn').innerHTML = timeLimit + 's';

@@ -68,9 +68,7 @@ document.querySelector('start-screen').addEventListener('start', function(e) {
       _updateText: function() {
         if (this.playerCount % 2 != 0 ) {
           var a = Math.floor(this.playerCount / 2);
-          var b = a+1;
-          teams[0].players = a;
-          teams[1].players = b;
+          var b = a + 1;
           this.groupText = 'Make two groups with ' + a + ' and ' + b + ' players, \n the group with ' + a +  ' players goes first.';
         } else {
           this.groupText = 'Make two groups with equal amount players.';
