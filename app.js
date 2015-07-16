@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var html = '';
     cards.forEach(function(card, index, array) {
-      html = html + `<moniker-card person="${card.Person}" text="${card.Text}" genre="${card.Genre}" points="${card.Points}"></moniker-card>`
+      var t = escapeHTML(card.Text);
+      html = html + `<moniker-card person="${card.Person}" text="${t}" genre="${card.Genre}" points="${card.Points}"></moniker-card>`
     });
     document.getElementById('table').innerHTML = html;
 
@@ -275,3 +276,19 @@ function Timer(cbUpdate, cbEnd, delay) {
   this.resume();
 }
 
+function escapeHTML(str, escapeQuotes) {
+  if (!str || typeof str !== 'string') {
+    return '';
+  }
+
+  var escaped = str.replace(/&/g, '&amp;')
+                   .replace(/</g, '&lt;')
+                   .replace(/"/g, '&quot;')
+                   .replace(/>/g, '&gt;');
+
+  if (escapeQuotes) {
+    return escaped.replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+  }
+
+  return escaped;
+}
