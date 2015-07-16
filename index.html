@@ -8,13 +8,13 @@
   <!-- <link rel="stylesheet" href="http://cloud.typography.com/7836072/694904/css/fonts.css"> -->
   <link rel="stylesheet" href="pure-min.css">
   <link rel="stylesheet" href="style.css">
-  <script src="/hammer.min.js"></script>
   <script src="/app.js"></script>
   <script src="dist/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="start-screen.html">
   <link rel="import" href="moniker-card.html">
+  <link rel="import" href="round-timer.html">
 </head>
 <body>
 <start-screen></start-screen>
@@ -22,9 +22,6 @@
 <div id="table">
   <moniker-card person="Bob Ross" text="A painter and TV host, who starred in PBS's The Joy of Painting. He taught viewers how to paint &quot;fluffy white clouds&quot; and &quot;happy little trees&quot; using wet on wet painting. He supposedly hated his white-guy afro and kept it only for marketing purposes." genre="Celebrities" points="2" index="0">
 </div>
-  <div id="menu">
-
-    <a role="button" class="pure-button" id="timer-btn" href="#">60s</a>
-  </div>
+<round-timer timeLimit="60"></round-timer>
 </body>
 </html>

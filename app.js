@@ -10,7 +10,6 @@ var currentTeam = 0;
 
 var playerCount = 4;
 var timeLimit = 60;
-var timer;
 
 var round = 0;
 var roundRules = ['Use ANY WORDS except the name itself, including other card text',
@@ -59,33 +58,12 @@ document.addEventListener('DOMContentLoaded', function() {
     //start();
   });
 
-
-
-
-
   // TODO: loading could be optimized
-  getCards();
+  loadCardsFromJSON();
 
-/*
-  var timerbtn = document.getElementById('timer-btn');
-  timerbtn.addEventListener("click", function() {
-    timerbtn.innerHTML = '&#10074;&#10074;';
-    timer.toggle();
-  });
-
-  // setup swipe handler
-  var myElement = document.getElementById('table');
-  var hammertime = new Hammer(myElement);
-  //hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-  hammertime.on('swipe', function(ev) {
-      if (ev.direction === Hammer.DIRECTION_LEFT) {
-        scoreCard();
-      }
-  });
-  */
 });
 
-function getCards() {
+function loadCardsFromJSON() {
   var request = new XMLHttpRequest();
   request.open('GET', '/cards.json', true);
   request.onload = function() {
@@ -255,36 +233,6 @@ function shuffle(c) {
     c[n] = temp;
   }
   return c;
-}
-
-function Timer(cbUpdate, cbEnd, delay) {
-  var timeoutId, timerId, start, paused, remaining = delay;
-
-  this.toggle = function() {
-    if (paused) {
-      this.resume();
-    } else {
-      this.pause();
-    }
-  }
-
-  this.pause = function() {
-    paused = true;
-    window.clearTimeout(timeoutId);
-    window.clearInterval(timerId);
-    remaining -= new Date() - start;
-  };
-
-  this.resume = function() {
-    paused = false;
-    start = new Date();
-    window.clearTimeout(timeoutId);
-    window.clearInterval(timerId);
-    timeoutId = window.setTimeout(cbEnd, remaining);
-    timerId = window.setInterval(cbUpdate, 1000);
-  };
-
-  this.resume();
 }
 
 function escapeHTML(str, escapeQuotes) {

@@ -1,0 +1,56 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<dom-module id="round-timer">
+  <style>
+    :host {
+    }
+  </style>
+
+  <template>
+    <a role="button" class="pure-button" id="timer-btn" href="#">60s</a>
+  </template>
+
+  <script>
+    Polymer({
+      is: "round-timer"
+    });
+
+    /*
+      var timerbtn = document.getElementById('timer-btn');
+  timerbtn.addEventListener("click", function() {
+    timerbtn.innerHTML = '&#10074;&#10074;';
+    timer.toggle();
+  });*/
+
+    function Timer(cbUpdate, cbEnd, delay) {
+      var timeoutId, timerId, start, paused, remaining = delay;
+
+      this.toggle = function() {
+        if (paused) {
+          this.resume();
+        } else {
+          this.pause();
+        }
+      }
+
+      this.pause = function() {
+        paused = true;
+        window.clearTimeout(timeoutId);
+        window.clearInterval(timerId);
+        remaining -= new Date() - start;
+      };
+
+      this.resume = function() {
+        paused = false;
+        start = new Date();
+        window.clearTimeout(timeoutId);
+        window.clearInterval(timerId);
+        timeoutId = window.setTimeout(cbEnd, remaining);
+        timerId = window.setInterval(cbUpdate, 1000);
+      };
+
+      this.resume();
+    }
+  </script>
+
+</dom-module>
