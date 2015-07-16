@@ -104,8 +104,8 @@
       </div>
     </div>
     <div class="control">
-      <button class="button-error pure-button"><img src="img/x.svg" height="25" width="25"></button>
-      <button class="button-success pure-button"><img src="img/check.svg" height="25" width="25"></button>
+      <button class="button-error pure-button" on-tap="skip"><img src="img/x.svg" height="25" width="25"></button>
+      <button class="button-success pure-button" on-tap="identified"><img src="img/check.svg" height="25" width="25"></button>
     </div>
   </template>
 
@@ -119,6 +119,13 @@
         genre: String,
         points: Number
       },
+      skip: function(e) {
+        alert("x");
+      },
+      identified: function(e) {
+        alert("check");
+      },
+
       ready: function() {
         switch (this.points) {
           case 1:
