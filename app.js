@@ -22,18 +22,19 @@ var roundRules = ['Use ANY WORDS except the name itself, including other card te
 
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('start-screen').addEventListener('start', function(e) {
+    // GAME SETUP
     playerCount = e.detail.playerCount;
     timeLimit = e.detail.timeLimit;
     var a = Math.floor(playerCount / 2);
     var b = a+1;
     teams[0].players = a;
     teams[1].players = b;
-
     document.querySelector('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
     document.getElementById('timer-btn').innerHTML = timeLimit + 's';
-    createDeck();
 
+    // DRAW CARDS TO TABLE
+    createDeck();
     var html = '';
     cards.forEach(function(card, index, array) {
       var t = escapeHTML(card.Text);
@@ -41,10 +42,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     document.getElementById('table').innerHTML = html;
 
+    // LISTEN FOR WHEN CARDS ARE SCORED
+    document.querySelector('moniker-card').addEventListener('scored', function(e) {
+      var index = e.detail.index;
+      teams[currentTeam].score = teams[currentTeam].score + cards[index].Points;
+
+      if (cards.length == 1) {
+        nextRound();
+        return;
+      }
+      cards.splice(index, 1);
+    });
+
     //setupCard(1, currentCard);
     //setupCard(2, currentCard + 1);
     //start();
   });
+
+
+
+
 
   // TODO: loading could be optimized
   getCards();

@@ -129,6 +129,7 @@
       identified: function(e) {
         this.$.check.setAttribute('disabled', 'disabled');
         this.$.x.style.display = 'none';
+        this.fire('scored', {index: this.index});
       },
 
       ready: function() {
