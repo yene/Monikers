@@ -77,6 +77,11 @@
     font-size: 8px;
   }
 
+  .control {
+    text-align: center;
+    margin-top: 10px;
+  }
+
   .button-success {
     background: rgb(28, 184, 65); /* this is a green */
   }
@@ -85,31 +90,16 @@
     margin-right: 10px;
     background: rgb(202, 60, 60); /* this is a maroon */
   }
-
-  .control {
-    text-align: center;
-    margin-top: 10px;
-  }
-
   </style>
 
   <template>
     <div class="card">
-      <h1>Bob Ross</h1>
-      <p>
-        A painter and TV host, who starred
-        in PBS's The Joy of Painting. He
-        taught viewers how to paint "fluffy
-        white clouds" and "happy little
-        trees" using wet on wet painting. He
-        supposedly hated his white-guy afro
-        and kept it only for marketing
-        purposes.
-      </p>
+      <h1>{{person}}</h1>
+      <p>{{text}}</p>
       <div class="line"></div>
-      <div class="genre">Celebrities</div>
-      <div class="points">
-        <span class="points-value">2</span>
+      <div class="genre" id="genre">{{genre}}</div>
+      <div class="points" id="points">
+        <span class="points-value">{{points}}</span>
         <div class="points-label">Point</div>
       </div>
     </div>
@@ -122,7 +112,35 @@
   <script>
     // register a new element called proto-element
     Polymer({
-      is: "moniker-card"
+      is: "moniker-card",
+      properties: {
+        person: String,
+        text: String,
+        genre: String,
+        points: Number
+      },
+      ready: function() {
+        switch (this.points) {
+          case 1:
+            this.$.genre.style.color = "#54b899";
+            this.$.points.style.background = "#54b899";
+            break;
+          case 2:
+            this.$.genre.style.color = "#15ace5";
+            this.$.points.style.background = "#15ace5";
+            break;
+          case 3:
+            this.$.genre.style.color = "#8f66a5";
+            this.$.points.style.background = "#8f66a5";
+            break;
+          case 4:
+            this.$.genre.style.color = "#e84735";
+            this.$.points.style.background = "#e84735";
+            break;
+          default:
+            console.log("I didn't know I this exists.")
+        }
+      }
     });
   </script>
 
