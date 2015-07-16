@@ -1,7 +1,6 @@
 var completeDeck = [];
 var deck = [];
 var cards = [];
-var currentCard = 0;
 
 var teamA = {score: 0, players: 2};
 var teamB = {score: 0, players: 2};
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', function() {
     teams[1].players = b;
     document.querySelector('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
-    document.getElementById('timer-btn').innerHTML = timeLimit + 's';
 
     // DRAW CARDS TO TABLE
     createDeck();
@@ -79,19 +77,6 @@ function loadCardsFromJSON() {
   request.send();
 }
 
-function start() {
-  var time = timeLimit;
-  var myElement = document.getElementById('timer-btn');
-  timer = new Timer(function() {
-    time--;
-    myElement.innerHTML = time + 's';
-  }, function() {
-    myElement.innerHTML = '0s';
-    nextPlayer();
-    timer.pause();
-  }, timeLimit * 1000);
-}
-
 function setupCard(nodeIndex, cardIndex) {
   if (cards.length-1 < cardIndex) {
     console.log('not enough cards');
@@ -125,44 +110,6 @@ function setupCard(nodeIndex, cardIndex) {
       console.log("I didn't know I this exists.")
   }
 }
-
-function nextCard() {
-  currentCard++;
-  var f = document.getElementById('card-' + 0);
-  var s = document.getElementById('card-' + 1);
-  var t = document.getElementById('card-' + 2);
-  f.classList.add("card-transform");
-  s.classList.add("card-transform");
-  t.classList.add("card-transform");
-  f.addEventListener('transitionend', function() {
-    f.classList.add("notransition");
-    s.classList.add("notransition");
-    t.classList.add("notransition");
-    f.classList.remove("card-transform");
-    s.classList.remove("card-transform");
-    t.classList.remove("card-transform");
-    f.classList.remove("notransition");
-    s.classList.remove("notransition");
-    t.classList.remove("notransition");
-    setupCard(1, currentCard);
-    setupCard(2, currentCard+1);
-  }, false);
-}
-
-function scoreCard() {
-  teams[currentTeam].score = teams[currentTeam].score + cards[currentCard].Points;
-
-  if (cards.length == 1) {
-    nextRound();
-    return;
-  }
-
-  cards.splice(currentCard, 1);
-  currentCard--;
-  nextCard();
-}
-
-
 
 function nextPlayer() {
   currentTeam = currentTeam === 0 ? 1 : 0;
@@ -211,7 +158,6 @@ function createDeck() {
 
 function nextRound() {
   round++;
-  timer.pause();
   swal({
     title: 'Round ' + round + ' is over.',
     text: 'Rules for next Round:\n' + roundRules[round],
