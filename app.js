@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var html = '';
     cards.forEach(function(card, index, array) {
       var t = escapeHTML(card.Text);
-      html = html + `<moniker-card person="${card.Person}" text="${t}" genre="${card.Genre}" points="${card.Points}"></moniker-card>`
+      html = html + `<moniker-card index="${index}" person="${card.Person}" text="${t}" genre="${card.Genre}" points="${card.Points}"></moniker-card>`
     });
     document.getElementById('table').innerHTML = html;
 
@@ -50,15 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
   getCards();
 
 /*
-  // setup buttons
-  var scorebtn = document.getElementById('score-btn');
-  scorebtn.addEventListener("click", function() {
-    scoreCard();
-  });
-  var skipbtn = document.getElementById('skip-btn');
-  skipbtn.addEventListener("click", function() {
-    skipCard();
-  });
   var timerbtn = document.getElementById('timer-btn');
   timerbtn.addEventListener("click", function() {
     timerbtn.innerHTML = '&#10074;&#10074;';
@@ -176,9 +167,7 @@ function scoreCard() {
   nextCard();
 }
 
-function skipCard() {
-  nextCard();
-}
+
 
 function nextPlayer() {
   currentTeam = currentTeam === 0 ? 1 : 0;
