@@ -7,21 +7,45 @@
   </style>
 
   <template>
-    <a role="button" class="pure-button" id="timer-btn" href="#">60s</a>
+    <a role="button" class="pure-button" id="timerBtn" href="" on-tap="handleTap">60s</a>
   </template>
 
   <script>
     Polymer({
-      is: "round-timer"
+      is: "round-timer",
+      properties: {
+        timeLimit: {
+          type: Number
+        }
+      },
+      ready: function() {
+        this.$.timerBtn.innerHTML = this.timeLimit + 's';
+      },
+      handleTap: function(e) {
+        this.$.timerBtn.innerHTML = "&#10074;&#10074;";
+        e.preventDefault();
+        return;
+      }
     });
-
+    // <img data-state="pause" data-src="media.svg" class="iconic" alt="media" />
     /*
       var timerbtn = document.getElementById('timer-btn');
   timerbtn.addEventListener("click", function() {
     timerbtn.innerHTML = '&#10074;&#10074;';
     timer.toggle();
   });*/
-
+function start() {
+  var time = timeLimit;
+  var myElement = document.getElementById('timer-btn');
+  timer = new Timer(function() {
+    time--;
+    myElement.innerHTML = time + 's';
+  }, function() {
+    myElement.innerHTML = '0s';
+    nextPlayer();
+    timer.pause();
+  }, timeLimit * 1000);
+}
     function Timer(cbUpdate, cbEnd, delay) {
       var timeoutId, timerId, start, paused, remaining = delay;
 
