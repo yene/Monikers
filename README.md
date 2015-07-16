@@ -25,6 +25,9 @@ babel script.js --watch --out-file script-compiled.js
 * swipe down = score card
 * when card is scored do a swipe down animation
 
+# optimization
+* maybe reference to the all cards array instead of making a copy
+
 # Mobile Safari View Size
 Safari view is smaller than the screen, min 740px
 http://stackoverflow.com/questions/24889100/ios-8-removed-minimal-ui-viewport-property-are-there-other-soft-fullscreen

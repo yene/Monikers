@@ -22,19 +22,28 @@ var roundRules = ['Use ANY WORDS except the name itself, including other card te
 
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('start-screen').addEventListener('start', function(e) {
-    console.log(e.type, e.detail.timeLimit, e.detail.playerCount);
     playerCount = e.detail.playerCount;
     timeLimit = e.detail.timeLimit;
     document.querySelector('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
     document.getElementById('timer-btn').innerHTML = timeLimit + 's';
-    setup();
-    start();
+    createDeck();
+
+    var html = '';
+    cards.forEach(function(card, index, array) {
+      html = html + `<moniker-card person="${card.Person}" text="${card.Text}" genre="${card.Genre}" points="${card.Points}"></moniker-card>`
+    });
+    document.getElementById('table').innerHTML = html;
+
+    //setupCard(1, currentCard);
+    //setupCard(2, currentCard + 1);
+    //start();
   });
 
   // TODO: loading could be optimized
   getCards();
 
+/*
   // setup buttons
   var scorebtn = document.getElementById('score-btn');
   scorebtn.addEventListener("click", function() {
@@ -59,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         scoreCard();
       }
   });
+  */
 });
 
 function getCards() {
@@ -196,7 +206,7 @@ function updateSettings() {
   }
 }
 
-function setup() {
+function createDeck() {
   var tmp = shuffle(completeDeck);
   // deal 8 cards to each player, and pick 5
   for (var i=0;i<playerCount;i++) {
@@ -206,10 +216,7 @@ function setup() {
       deck.push(tmp[n]);
     }
   }
-
   cards = shuffle(deck).slice(0);
-  setupCard(1, currentCard);
-  setupCard(2, currentCard + 1);
 }
 
 function nextRound() {
