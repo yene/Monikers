@@ -20,6 +20,17 @@ document.querySelector('start-screen').addEventListener('start', function(e) {
       margin-left: 10px;
       margin-right: 10px;
     }
+
+    @media (max-width: 480px) {
+      :host label {
+        text-align: center !important;
+      }
+      :host input {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
   </style>
 
   <template>
