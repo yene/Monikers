@@ -18,7 +18,7 @@ document.querySelector('round-timer').addEventListener('timeout', function() {
   </style>
 
   <template>
-    <a role="button" class="pure-button" id="timerBtn" href="" on-tap="handleTap">60s</a>
+    <a role="button" class="pure-button" id="timerBtn" href="" on-tap="handleTap"></a>
   </template>
 
   <script>
@@ -31,25 +31,27 @@ document.querySelector('round-timer').addEventListener('timeout', function() {
       },
       startTimer: function(time) {
         this.timeLimit = time;
+        this.$.timerBtn.innerHTML = this.timeLimit;
         var p = this;
         timer = new Timer(function() {
           time--;
-          p.$.timerBtn.innerHTML = time + 's';
+          p.$.timerBtn.innerHTML = time;
         }, function() {
-          p.$.timerBtn.innerHTML = this.timeLimit + 's';
+          p.$.timerBtn.innerHTML = this.timeLimit;
           timer.pause();
           p.fire('timeout');
         }, timeLimit * 1000);
       },
       stopTimer: function() {
         timer.pause();
-        this.$.timerBtn.innerHTML = this.timeLimit + 's';
-      },
-      ready: function() {
-        this.$.timerBtn.innerHTML = this.timeLimit + 's';
+        this.$.timerBtn.innerHTML = this.timeLimit;
       },
       handleTap: function(e) {
-        this.$.timerBtn.innerHTML = "&#10074;&#10074;";
+        if (timer.isPaused()) {
+          this.$.timerBtn.innerHTML = "...";
+        } else {
+          this.$.timerBtn.innerHTML = "&#10074;&#10074;";
+        }
         timer.toggle(); // TODO: toggle takes one second to show the time
         e.preventDefault();
         return;
@@ -59,13 +61,17 @@ document.querySelector('round-timer').addEventListener('timeout', function() {
     function Timer(cbUpdate, cbEnd, delay) {
       var timeoutId, timerId, start, paused, remaining = delay;
 
+      this.isPaused = function() {
+        return paused;
+      };
+
       this.toggle = function() {
         if (paused) {
           this.resume();
         } else {
           this.pause();
         }
-      }
+      };
 
       this.pause = function() {
         paused = true;
