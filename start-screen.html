@@ -16,6 +16,7 @@ document.querySelector('start-screen').addEventListener('start', function(e) {
       text-align: center;
     }
     :host > div {
+      position: absolute;
       margin-left: 10px;
       margin-right: 10px;
     }
@@ -61,7 +62,7 @@ document.querySelector('start-screen').addEventListener('start', function(e) {
         }
       },
       handleClick: function() {
-        this.fire('start', {playerCount: this.playerCount, timeLimit: this.timeLimit});
+        this.fire('start', {playerCount: parseInt(this.playerCount, 10), timeLimit: parseInt(this.timeLimit, 10)});
       },
 
       _updateText: function() {

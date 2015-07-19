@@ -18,6 +18,9 @@ var roundRules = ['Use ANY WORDS except the name itself, including other card te
 'No words, no movement, just a singular noise.'
 ];
 
+// TODO: loading could be optimized
+loadCardsFromJSON();
+
 document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('start-screen').addEventListener('start', function(e) {
     // GAME SETUP
@@ -51,14 +54,13 @@ document.addEventListener('DOMContentLoaded', function() {
       cards.splice(index, 1);
     });
 
-    //setupCard(1, currentCard);
-    //setupCard(2, currentCard + 1);
-    //start();
+    document.querySelector('round-timer').style.display = 'inline-block';
+    document.querySelector('round-timer').startTimer(timeLimit);
+    document.querySelector('round-timer').addEventListener('timeout', function() {
+      alert("next player");
+      nextPlayer();
+    });
   });
-
-  // TODO: loading could be optimized
-  loadCardsFromJSON();
-
 });
 
 function loadCardsFromJSON() {

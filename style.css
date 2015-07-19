@@ -1,9 +1,7 @@
 
 html, body, main {
   height: 100%;
-  /*overflow-x: hidden;*/
 }
-/* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
   background-color: rgba(157, 173, 182, 0.3);
@@ -14,18 +12,22 @@ html {
 
 body {
   margin: 0;
-  /* best helvetica */
   font-family: "Gotham Rounded A", sans-serif;
   font-weight: 300;
   background-color: rgba(157, 173, 182, 0.5);
-  /*width: 320px;*/
   max-height: 460px;
 }
 
 start-screen {
 }
 
-/* GAME */
+round-timer {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 120px;
+}
+
 #table {
   display: none;
   width: 100%;
@@ -46,23 +48,3 @@ moniker-card {
   -webkit-scroll-snap-coordinate: 50% 50%;
   scroll-snap-coordinate: 50% 50%;
 }
-
-.card-transform {
-  transform: translateX(-260px);
-  transition: 1s ease-in-out;
-}
-
-.notransition {
-  transition-delay: 0s;
-  transition-duration: 0s;
-}
-
-#menu {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-#menu > a {
-  margin-left: 5px;
-}
-
