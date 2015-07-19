@@ -24,6 +24,7 @@ babel script.js --watch --out-file script-compiled.js
 * maybe use font awesome icons http://stackoverflow.com/questions/22885702/html-for-the-pause-symbol-in-a-video-control
 * swipe down = score card
 * when card is scored do a swipe down animation
+* play sound when enemy teams turn
 
 # optimization
 * maybe reference to the all cards array instead of making a copy

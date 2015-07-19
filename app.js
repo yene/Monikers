@@ -167,6 +167,17 @@ function createDeck() {
 
 function nextRound() {
   round++;
+  if (round > roundRules.length) {
+    swal({
+      title: 'Game Over',
+      text: 'Thanks for playing. \n Team A: ' + teamA.score + ' Team B: ' + teamB.score,
+      }, function() {
+        location.reload();
+      }
+    );
+    return;
+  }
+
   cards = shuffle(generatedDeck).slice(0);
   setupTable();
   document.getElementById('table').scrollLeft = 0;
@@ -176,7 +187,7 @@ function nextRound() {
     }, function() {
       document.querySelector('round-timer').startTimer(timeLimit);
     }
-  )
+  );
 }
 
 function shuffle(c) {
