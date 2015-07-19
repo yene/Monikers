@@ -41,6 +41,10 @@ document.querySelector('round-timer').addEventListener('timeout', function() {
           p.fire('timeout');
         }, timeLimit * 1000);
       },
+      stopTimer: function() {
+        timer.pause();
+        this.$.timerBtn.innerHTML = this.timeLimit + 's';
+      },
       ready: function() {
         this.$.timerBtn.innerHTML = this.timeLimit + 's';
       },
