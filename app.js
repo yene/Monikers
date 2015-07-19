@@ -2,8 +2,8 @@ var completeDeck = [];
 var generatedDeck = [];
 var cards = [];
 
-var teamA = {score: 0, players: 2};
-var teamB = {score: 0, players: 2};
+var teamA = {score: 0};
+var teamB = {score: 0};
 var teams = [teamA, teamB];
 var currentTeam = 0;
 
@@ -26,10 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // GAME SETUP
     playerCount = e.detail.playerCount;
     timeLimit = e.detail.timeLimit;
-    var a = Math.floor(playerCount / 2);
-    var b = a+1;
-    teams[0].players = a;
-    teams[1].players = b;
     document.querySelector('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
 
