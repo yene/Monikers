@@ -11,11 +11,11 @@ var playerCount = 4;
 var timeLimit = 60;
 
 var round = 0;
-var roundRules = ['Use ANY WORDS except the name itself, including other card text',
-'Use only ONE WORD',
-'NO LANGUAGE allowed, only physical gestures and imitations.',
+var roundRules = ['Use ANY WORDS except the name itself, \nincluding other card text.',
+'Use only ONE WORD.',
+'NO LANGUAGE allowed, \nonly physical gestures and imitations.',
 'Only use your hands.',
-'No words, no movement, just a singular noise.'
+'No words, no movement, \njust a singular noise.'
 ];
 
 // TODO: loading could be optimized
@@ -33,16 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('start-screen').style.display = 'none';
     document.getElementById('table').style.display = 'block';
 
-    // DRAW CARDS TO TABLE
     createDeck();
-    setupTable();
-    document.getElementById('table').scrollLeft = 0;
 
     document.querySelector('round-timer').style.display = 'inline-block';
-    document.querySelector('round-timer').startTimer(timeLimit);
     document.querySelector('round-timer').addEventListener('timeout', function() {
       nextPlayer();
     });
+
+    nextRound();
+
   });
 
   // LISTEN FOR WHEN CARDS ARE SCORED
@@ -53,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var len = cards.filter(function(val) { return val !== null; }).length;
     if (len == 0) {
+      document.querySelector('round-timer').stopTimer();
       nextRound();
       return;
     }
@@ -166,14 +166,13 @@ function createDeck() {
 }
 
 function nextRound() {
-  document.querySelector('round-timer').stopTimer();
   round++;
   cards = shuffle(generatedDeck).slice(0);
   setupTable();
   document.getElementById('table').scrollLeft = 0;
   swal({
-    title: 'Round ' + round + ' is over.',
-    text: 'Rules for next Round:\n' + roundRules[round],
+    title: 'Round ' + round,
+    text: roundRules[round-1],
     }, function() {
       document.querySelector('round-timer').startTimer(timeLimit);
     }
