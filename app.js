@@ -1,5 +1,5 @@
 var completeDeck = [];
-var deck = [];
+var generatedDeck = [];
 var cards = [];
 
 var teamA = {score: 0, players: 2};
@@ -35,33 +35,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // DRAW CARDS TO TABLE
     createDeck();
-    var html = '';
-    cards.forEach(function(card, index, array) {
-      var t = escapeHTML(card.Text);
-      html = html + `<moniker-card index="${index}" person="${card.Person}" text="${t}" genre="${card.Genre}" points="${card.Points}"></moniker-card>`
-    });
-    document.getElementById('table').innerHTML = html;
-
-    // LISTEN FOR WHEN CARDS ARE SCORED
-    document.querySelector('moniker-card').addEventListener('scored', function(e) {
-      var index = e.detail.index;
-      teams[currentTeam].score = teams[currentTeam].score + cards[index].Points;
-
-      if (cards.length == 1) {
-        nextRound();
-        return;
-      }
-      cards.splice(index, 1);
-    });
+    setupTable();
+    document.getElementById('table').scrollLeft = 0;
 
     document.querySelector('round-timer').style.display = 'inline-block';
     document.querySelector('round-timer').startTimer(timeLimit);
     document.querySelector('round-timer').addEventListener('timeout', function() {
-      alert("next player");
       nextPlayer();
     });
   });
+
+  // LISTEN FOR WHEN CARDS ARE SCORED
+  document.getElementById('table').addEventListener('scored', function(e) {
+    var index = e.detail.index;
+    teams[currentTeam].score = teams[currentTeam].score + cards[index].Points;
+    cards[index] = null;
+
+    var len = cards.filter(function(val) { return val !== null; }).length;
+    if (len == 0) {
+      nextRound();
+      return;
+    }
+  });
+
 });
+
+function setupTable() {
+  var html = '';
+  cards.forEach(function(card, index, array) {
+    if (card) {
+      var t = escapeHTML(card.Text);
+      html = html + `<moniker-card index="${index}" person="${card.Person}" text="${t}" genre="${card.Genre}" points="${card.Points}"></moniker-card>`
+    }
+  });
+  document.getElementById('table').innerHTML = html;
+}
 
 function loadCardsFromJSON() {
   var request = new XMLHttpRequest();
@@ -116,15 +124,14 @@ function setupCard(nodeIndex, cardIndex) {
 function nextPlayer() {
   currentTeam = currentTeam === 0 ? 1 : 0;
   // reshuffel all skipped cards
-  currentCard = 0;
   cards = shuffle(cards);
-  setupCard(1, currentCard);
-  setupCard(2, currentCard + 1);
+  setupTable();
+  document.getElementById('table').scrollLeft = 0;
   swal({
-    title: "Stop, next teams turn",
+    title: "Stop! Opponents turn.",
     text: "Teams take turns giving clues. Each player must take a turn as the clue giver before any teammates repeats the role.",
     }, function(){
-      start();
+      document.querySelector('round-timer').startTimer(timeLimit);
     }
   )
 }
@@ -152,22 +159,23 @@ function createDeck() {
     for (var j=0;j<5;j++) {
       var n = Math.floor((Math.random() * tmp.length));
       tmp.splice(n, 1);
-      deck.push(tmp[n]);
+      generatedDeck.push(tmp[n]);
     }
   }
-  cards = shuffle(deck).slice(0);
+  cards = shuffle(generatedDeck).slice(0);
 }
 
 function nextRound() {
+  document.querySelector('round-timer').stopTimer();
   round++;
+  cards = shuffle(generatedDeck).slice(0);
+  setupTable();
+  document.getElementById('table').scrollLeft = 0;
   swal({
     title: 'Round ' + round + ' is over.',
     text: 'Rules for next Round:\n' + roundRules[round],
     }, function() {
-      cards = shuffle(deck).slice(0);
-      setupCard(1, currentCard);
-      setupCard(2, currentCard + 1);
-      start();
+      document.querySelector('round-timer').startTimer(timeLimit);
     }
   )
 }
